@@ -45,6 +45,7 @@ import starknetJson from "../content/layers/starknet.json";
 import bitcoinosJson from "../content/layers/bitcoinos.json";
 import satoshivmJson from "../content/layers/satoshivm.json";
 import bouncebitJson from "../content/layers/bouncebit.json";
+import lombardJson from "../content/layers/lombard.json";
 
 // @ts-ignore
 const core: Layer = coreJson as Layer;
@@ -96,6 +97,7 @@ const starknet: Layer = starknetJson as Layer;
 const bitcoinos: Layer = bitcoinosJson as Layer;
 const satoshivm: Layer = satoshivmJson as Layer;
 const bouncebit: Layer = bouncebitJson as Layer;
+const lombard: Layer = lombardJson as Layer;
 
 export const allLayers: Layer[] = [
     core,
@@ -141,6 +143,7 @@ export const allLayers: Layer[] = [
     bevm,
     starknet,
     bitcoinos,
+    lombard,
 ];
 
 export const allLayerSlugs: string[] = allLayers.map((layer) => layer.slug);
