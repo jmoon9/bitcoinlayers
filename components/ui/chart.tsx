@@ -181,31 +181,38 @@ const ChartTooltipContent = React.forwardRef<
 
         const sortFunction = sort
             ? (a: any, b: any) => {
-                  const valueA = a.value;
-                  const valueB = b.value;
+                const valueA = a.value;
+                const valueB = b.value;
 
-                  if (
-                      typeof valueA === "number" &&
-                      typeof valueB === "number"
-                  ) {
-                      return sort === "desc"
-                          ? valueB - valueA
-                          : valueA - valueB;
-                  }
+                const nameA = a.name;
+                const nameB = b.name;
 
-                  const dateA = new Date(valueA);
-                  const dateB = new Date(valueB);
+                if (sort === 'alpha') {
+                    // Alphabetical sorting using nameA and nameB
+                    if (typeof nameA === "string" && typeof nameB === "string") {
+                        return nameA.localeCompare(nameB);
+                    }
+                    // Fallback to string comparison if names are not strings
+                    return String(nameA).localeCompare(String(nameB));
+                }
 
-                  if (!isNaN(dateA.getTime()) && !isNaN(dateB.getTime())) {
-                      return sort === "desc"
-                          ? dateB.getTime() - dateA.getTime()
-                          : dateA.getTime() - dateB.getTime();
-                  }
+                if (typeof valueA === "number" && typeof valueB === "number") {
+                    return sort === "desc" ? valueB - valueA : valueA - valueB;
+                }
 
-                  return sort === "desc"
-                      ? String(valueB).localeCompare(String(valueA))
-                      : String(valueA).localeCompare(String(valueB));
-              }
+                const dateA = new Date(valueA);
+                const dateB = new Date(valueB);
+
+                if (!isNaN(dateA.getTime()) && !isNaN(dateB.getTime())) {
+                    return sort === "desc"
+                        ? dateB.getTime() - dateA.getTime()
+                        : dateA.getTime() - dateB.getTime();
+                }
+
+                return sort === "desc"
+                    ? String(valueB).localeCompare(String(valueA))
+                    : String(valueA).localeCompare(String(valueB));
+            }
             : undefined;
 
         return (

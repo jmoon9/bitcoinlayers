@@ -206,7 +206,7 @@ export default function LayersTVLChart() {
                                         )
                                     }
                                     className="w-60"
-                                    sort="desc"
+                                    sort="alpha"
                                 />
                             }
                         />
